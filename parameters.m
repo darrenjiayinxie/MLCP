@@ -1,7 +1,7 @@
-function A = parameters(A)
+function [M,q,r,zk,wk,l,u] = parameters()
 N=24;
-A.n = N;
-A.wk = zeros(N,1);
+
+wk = zeros(N,1);
 
 global e_t e_o e_r mu;
 e_t = 1;
@@ -72,7 +72,7 @@ p_n =  g*m*h;
 sig = 0;
 
 % Z - initial guess total unknown variables
-A.zk = [nu;ECP;Con_wrench;sig;La;p_n]; 
+zk = [nu;ECP;Con_wrench;sig;La;p_n]; 
 
 
 
@@ -86,15 +86,15 @@ n_1 = size([nu;ECP;Con_wrench]);
 n_2 = size([sig;La;p_n]); 
 
 % l - lower bound 
-A.l(1:n_1,1) = -Inf; 
-A.l(n_1+1:n_1+n_2,1) = 0;
+l(1:n_1,1) = -Inf; 
+l(n_1+1:n_1+n_2,1) = 0;
 
-A.u(1:n_1+n_2,1) = Inf;
+u(1:n_1+n_2,1) = Inf;
 
 f= @fcn;
 Df = @jacobian;
 
-A.M =Df(A.zk);
-A.q = f(A.zk) - A.M*A.zk;
+M =Df(zk);
+q = f(zk) - M*zk;
 
-A.r = -(A.M*A.zk-eye(N)*A.wk+A.q);
+r = -(M*zk-eye(N)*wk+q);

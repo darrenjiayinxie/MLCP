@@ -2,7 +2,7 @@ function [zk_n,wk_n,A] = MLCP(M,q,r,zk,wk,l)
 
 
 A.zer_tol = 1e-16;
-A.piv_tol = 1e-10;
+A.piv_tol = 1e-8;
 A.minor_iter=1;
 
 
@@ -22,7 +22,7 @@ A.var = zeros(A.n,3);
 
 A.z = A.zk;
 A.w = A.wk;
-A.s = 1/norm(A.r); % scale variable
+A.s = 1; % scale variable
 N_c = 30;
 %% Initialize the basis
 for i = 1:A.n
@@ -93,7 +93,7 @@ A.Be = -A.r*A.s;
 %A.i_Basis = inv(A.Basis);
 
 
-A.coeff = A.Basis\A.Be;
+A.coeff =A.Basis\A.Be;
 A = ratio_test(A); 
 A.i_t = A.i_table;
 A.t = A.theta;
@@ -102,8 +102,15 @@ if A.theta >= 1/A.s
     A.theta = 1/A.s;
     A.Vec_B = A.Vec_B - A.theta*A.coeff;
     % update A.z
-    i_z = A.table((A.table(:,2) <= 1),1);
-    A.z(i_z,1) = A.Vec_B(i_z);
+    i_z = A.table((A.table(:,2) <=1),1);
+    i_w = A.table((A.table(:,2) ==2),1);
+    i_zB = A.table(:,2) <=1;
+    i_wB = A.table(:,2) ==2;
+    A.z(i_z,1) = A.Vec_B(i_zB);
+    A.z(i_w,1) = 0;
+    A.w(i_w) = A.Vec_B(i_wB);
+    A.w(i_z,1) = 0;
+    
     zk_n = A.z;
     wk_n = A.w;
     return
@@ -119,7 +126,9 @@ A = pivot_rules(A);
 while (A.type_leave ~= 3)
     
     A = ratio_test(A); 
+    
     A = updates(A);
+   
     A = pivot_rules(A);
     
     % check cycling

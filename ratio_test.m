@@ -7,6 +7,7 @@
 function A = ratio_test(A)
 
 x = A.Vec_B;
+
 %% determine the moving direction when entering variables as z type not on boundary
 A.direction = 1; % direction by default
 flag = 0;
@@ -33,10 +34,10 @@ else
 end
 
 d = A.direction*A.coeff;
-%% identify leaving variables as z and w type
 
-j1=find((d>=A.piv_tol)&(A.table(:,2)==1));
-j2=find((d>=A.piv_tol)&(A.table(:,2)==2));
+%% identify leaving variables as bounded z and w type
+j1=find((d>A.piv_tol)&(A.table(:,2)==1));
+j2=find((d>A.piv_tol)&(A.table(:,2)==2));
 j12 = [j1;j2];
 if isempty(j12)
     theta12 = Inf;
@@ -45,7 +46,7 @@ else
 end
 j12=j12((x(j12)./d(j12))<=theta12); 
 %% identify leaving variables as a type
-j4 = find((abs(d)>=A.piv_tol)&(A.table(:,2)==4));
+j4 = find((abs(d)>A.piv_tol)&(A.table(:,2)==4));
 if isempty(j4)
     theta4 = Inf;
 else
@@ -53,7 +54,7 @@ else
 end
 %j4=j4((x(j4)./d(j4))<=(theta4)); 
 %% identify leaving variables as t type
-j3 = find(A.table(:,2)==3&(d<=-A.piv_tol));
+j3 = find(A.table(:,2)==3&(d<-A.piv_tol));
 if isempty(j3)
     theta3 = Inf;
 else
@@ -66,7 +67,13 @@ Theta = [theta3,theta4,theta12];
 [theta,index] = min(Theta);
 A.theta = theta;
 if (theta == Inf)||((flag == 1)&&(theta>=theta_z))
-    error('ray termination');
+    if A.type_enter == 3
+        A.theta =1/A.s;
+        A.i_table = A.n +1;
+    else
+        error('ray termination');
+    end
+    
 else 
     if index(1) ==1 % t type
         A.i_table = j3;

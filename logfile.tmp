@@ -1,5 +1,5 @@
 Path 4.7.03: Matlab Link
-10 row/cols, 100 non-zeros, 100.00% dense.
+30 row/cols, 900 non-zeros, 100.00% dense.
 
 Could not open options file: path.opt
 Using defaults.
@@ -8,51 +8,56 @@ Written by Todd Munson, Steven Dirkse, and Michael Ferris
 
 
 INITIAL POINT STATISTICS
-Maximum of X. . . . . . . . . .  9.5797e-001 var: (x[    7])
-Maximum of F. . . . . . . . . .  5.9083e+000 eqn: (f[    5])
-Maximum of Grad F . . . . . . .  1.9228e+000 eqn: (f[    5])
-                                            var: (x[    5])
+Maximum of X. . . . . . . . . .  9.0643e-001 var: (x[   15])
+Maximum of F. . . . . . . . . .  8.1996e+000 eqn: (f[   22])
+Maximum of Grad F . . . . . . .  9.9932e-001 eqn: (f[    5])
+                                            var: (x[   29])
 
 INITIAL JACOBIAN NORM STATISTICS
-Maximum Row Norm. . . . . . . .  7.7518e+000 eqn: (f[    5])
-Minimum Row Norm. . . . . . . .  5.1922e+000 eqn: (f[    1])
-Maximum Column Norm . . . . . .  7.4752e+000 var: (x[    8])
-Minimum Column Norm . . . . . .  4.8044e+000 var: (x[    3])
+Maximum Row Norm. . . . . . . .  1.8530e+001 eqn: (f[   17])
+Minimum Row Norm. . . . . . . .  1.0104e+001 eqn: (f[   30])
+Maximum Column Norm . . . . . .  1.7088e+001 var: (x[   17])
+Minimum Column Norm . . . . . .  1.2207e+001 var: (x[   15])
 
 Crash Log
 major  func  diff  size  residual    step       prox   (label)
-    0     0             8.2604e+000             0.0e+000 (f[    7])
-    1     1     4    10 2.2136e+000  1.0e+000    0.0e+000 (f[    7])
-    2     2     0     6 4.4171e-016  1.0e+000    0.0e+000 (f[    7])
-pn_search terminated: no basis change.
+    0     0             5.4202e+001             0.0e+000 (f[   22])
+    1     1     8    30 1.6610e+001  1.0e+000    0.0e+000 (f[   22])
+pn_search terminated: no progress.
 
 Major Iteration Log
 major minor  func  grad  residual    step  type prox    inorm  (label)
-    0     0     3     3 4.4171e-016           I 0.0e+000 3.4e-016 (f[    7])
+    0     0    14     2 1.6610e+001           I 0.0e+000 4.9e+000 (f[   22])
+
+Minor Iteration Log
+minor      t          z     w     v   art ckpts  enter    leave
+  500  9.8048e-009    26     3     0     0     9 w[   23] z[   27]
+    1     1    38     3 1.2273e+001  1.2e-002 SG 0.0e+000 4.7e+000 (f[    3])
+    2    28    39     4 0.0000e+000  1.0e+000 SO 0.0e+000 0.0e+000 (f[    1])
 
 FINAL STATISTICS
-Inf-Norm of Complementarity . .  3.3654e-016 eqn: (f[    7])
-Inf-Norm of Normal Map. . . . .  3.3654e-016 eqn: (f[    7])
-Inf-Norm of Minimum Map . . . .  3.3307e-016 eqn: (f[    7])
-Inf-Norm of Fischer Function. .  3.3654e-016 eqn: (f[    7])
-Inf-Norm of Grad Fischer Fcn. .  5.7984e-016 eqn: (f[    2])
-Two-Norm of Grad Fischer Fcn. .  1.3689e-015
+Inf-Norm of Complementarity . .  0.0000e+000 eqn: (f[    1])
+Inf-Norm of Normal Map. . . . .  0.0000e+000 eqn: (f[    1])
+Inf-Norm of Minimum Map . . . .  0.0000e+000 eqn: (f[    1])
+Inf-Norm of Fischer Function. .  0.0000e+000 eqn: (f[    1])
+Inf-Norm of Grad Fischer Fcn. .  0.0000e+000 eqn: (f[    1])
+Two-Norm of Grad Fischer Fcn. .  0.0000e+000
 
 FINAL POINT STATISTICS
-Maximum of X. . . . . . . . . .  5.8641e-001 var: (x[    4])
-Maximum of F. . . . . . . . . .  8.3845e-001 eqn: (f[    3])
-Maximum of Grad F . . . . . . .  1.9228e+000 eqn: (f[    5])
-                                            var: (x[    5])
+Maximum of X. . . . . . . . . .  1.0000e+015 var: (x[    1])
+Maximum of F. . . . . . . . . .  7.5501e+015 eqn: (f[   11])
+Maximum of Grad F . . . . . . .  9.9932e-001 eqn: (f[    5])
+                                            var: (x[   29])
 
  ** EXIT - solution found.
 
-Major Iterations. . . . 0
-Minor Iterations. . . . 0
+Major Iterations. . . . 2
+Minor Iterations. . . . 1002
 Restarts. . . . . . . . 0
-Crash Iterations. . . . 2
-Gradient Steps. . . . . 0
-Function Evaluations. . 3
-Gradient Evaluations. . 3
-Basis Time. . . . . . . 0.000000
-Total Time. . . . . . . 0.000000
-Residual. . . . . . . . 4.417112e-016
+Crash Iterations. . . . 1
+Gradient Steps. . . . . 1
+Function Evaluations. . 39
+Gradient Evaluations. . 4
+Basis Time. . . . . . . 0.003000
+Total Time. . . . . . . 0.004000
+Residual. . . . . . . . 0.000000e+000
